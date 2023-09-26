@@ -11,20 +11,20 @@ import {
 } from '@ngneat/elf-entities';
 import { switchMap } from 'rxjs/operators';
 
-interface Todo {
+interface Empresa {
   id: number;
   title: string;
   completed: boolean;
 }
 
-export interface TodosProps {
+export interface EmpresaProps {
   filter: 'ALL' | 'ACTIVE' | 'COMPLETED';
 }
 
 const store = createStore(
-  { name: 'todos' },
-  withEntities<Todo>(),
-  withProps<TodosProps>({ filter: 'ALL' })
+  { name: 'empresas' },
+  withEntities<Empresa>(),
+  withProps<EmpresaProps>({ filter: 'ALL' })
 );
 
 @Injectable({ providedIn: 'root' })
@@ -45,7 +45,7 @@ export class TodosRepository {
     })
   );
 
-  selectByCompletedState(completed: Todo['completed']) {
+  selectByCompletedState(completed: Empresa['completed']) {
     return store.pipe(
       selectManyByPredicate((entity) => entity.completed === completed)
     );
@@ -57,7 +57,7 @@ export class TodosRepository {
     );
   }
 
-  addTodo(title: Todo['title']) {
+  addTodo(title: Empresa['title']) {
     store.update(addEntities({ id: 1, title, completed: false }));
     store.update(
       addEntities([
@@ -67,7 +67,7 @@ export class TodosRepository {
     );
   }
 
-  updateCompleted(id: Todo['id']) {
+  updateCompleted(id: Empresa['id']) {
     store.update(
       updateEntities(id, (entity) => ({
         ...entity,

@@ -8,6 +8,7 @@ import { PersonasComponent } from './personas/personas.component';
 import { EmpresasComponent } from './empresas/empresas.component';
 import { HttpClientModule } from '@angular/common/http';
 
+
 function initializeKeycloak(keycloak: KeycloakService) {
   return () =>
     keycloak.init({

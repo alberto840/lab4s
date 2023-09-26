@@ -9,6 +9,10 @@ export class ApiService {
 
   constructor(private http: HttpClient) {}
   getUsers() : Observable<any[]> {
-    return this.http.get<any[]>('http://localhost:8080/api/v1/internships');
+    return this.http.get<any[]>('http://localhost:8095/api/v1/internships');
+  }
+
+  public registerNewEmpresa(empresa: any): Observable<any>{
+    return this.http.post('http://localhost:8095/api/v1/internships', JSON);
   }
 }
